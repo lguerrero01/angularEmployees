@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-employee',
@@ -6,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-  
-  constructor(){
+
+  constructor( ){
     
   }
   ngOnInit(): void {
+   
   }
 
   listCitias: any[] = [];
@@ -23,6 +25,10 @@ export class EmployeeComponent implements OnInit {
 
   eliminarCitaListado(index: number) {
     this.listCitias.splice(index, 1);
+  }
+  
+  public fillForm(info: Employee){
+    console.log('esto es info',info)
   }
 
 }

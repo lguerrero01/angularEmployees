@@ -1,34 +1,44 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { EmployeService } from '../../services/employe.service';
+import { DataTableDirective } from 'angular-datatables';
+import { Employee } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-table-employees',
   templateUrl: './table-employees.component.html',
   styleUrls: ['./table-employees.component.css']
 })
-export class TableEmployeesComponent implements OnInit {
-
+export class TableEmployeesComponent implements OnInit, OnDestroy{
+  public listEmployees: Employee[] = []
+  public isDtInitialized: boolean = false;
   public dtOptions: DataTables.Settings = {};
-  persons: [] = [];
+  public data: any[] = [];
+  public dtElement!: DataTableDirective;
 
-  // We use this trigger because fetching the list of persons can be quite long,
-  // thus we ensure the data is fetched before rendering
-  dtTrigger: Subject<any> = new Subject<any>();
+  public dtTrigger: Subject<any> = new Subject<any>();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor( private employeeService: EmployeService) { }
 
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 2
     };
-    this.httpClient.get<any[]>('data/data.json')
-      .subscribe(data => {
-        this.persons = (data as any).data;
-        // Calling the DT trigger to manually render the table
-      });
-      this.dtTrigger.next(this.persons);
+    this.employeeService.newEmployee$.subscribe( resp => {
+      console.log('esta es la respuesta',resp);
+      this.listEmployees = resp;
+      if (this.isDtInitialized) {
+        // validating rendering
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+        });
+      } else {
+        this.isDtInitialized = true;
+      }
+      this.dtTrigger.next(this.listEmployees);
+    })
   }
 
   ngOnDestroy(): void {

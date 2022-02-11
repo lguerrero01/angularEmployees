@@ -1,18 +1,28 @@
-
-<h1>prueba</h1>
-<!-- <table  class="row-border hover">
+<div *ngIf="listEmployees.length <= 0 ; else table" class="card bg-light">
+  <div class="card-body">
+    <h5 class="card-title text-center">No Employees to show</h5>
+  </div>
+</div>
+<ng-template #table>
+  <table datatable class="row-border hover">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>First name</th>
+        <th>Name</th>
         <th>Last name</th>
+        <th>Date of Birth</th>
+        <th>status Work</th>
+        <th>Position</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let person of persons">
-        <td>{{ person }}</td>
-        <td>{{ person }}</td>
-        <td>{{ person }}</td>
+      <tr *ngFor="let item of listEmployees">
+        <td>{{item.name}}</td>
+        <td>{{item.lastName}}</td>
+        <td>{{item.dateOfBirth}}</td>
+        <td>{{item.statusWork}}</td>
+        <td>{{item.position}}</td>
       </tr>
+
     </tbody>
-  </table> -->
+  </table>
+</ng-template>

@@ -1,9 +1,9 @@
+import { DataTablesModule } from 'angular-datatables';
 //////////////////
 // Modules
 /////////////////
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 /////////////////
 // Components
@@ -23,8 +23,10 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     TableEmployeesComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, DataTablesModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, DataTablesModule, DataTablesModule.forRoot()],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [
+  ]
 })
 export class AppModule {}
