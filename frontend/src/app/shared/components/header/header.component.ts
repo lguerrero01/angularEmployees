@@ -12,8 +12,8 @@ export class HeaderComponent implements OnInit {
       route: '/home'
     },
     {
-      text: 'Add and Edit Employee',
-      route: '/students'
+      text: 'Add/Edit Employee',
+      route: '/employees'
     },
  
   ]

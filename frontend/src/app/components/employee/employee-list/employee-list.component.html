@@ -1,1 +1,22 @@
-<p>employee-list works!</p>
+<div *ngIf="listEmployees.length <= 0" class="card bg-light">
+    <div class="card-body">
+        <h5 class="card-title text-center">No Employees to show</h5>
+    </div>
+</div>
+<div  class="card mb-2">
+    <div class="card-body" *ngFor="let item of listEmployees; let i = index">
+        <p class="card-text"><span>Name: {{item.name}}</span></p>
+        <p class="card-text"><span>Last Name: {{item.lastName}}</span></p>
+        <p class="card-text"><span>Date Of Birth: {{item.dateOfBirth}}</span></p>
+        <p class="card-text"><span>Status Work: {{item.statusWork}} </span></p>
+        <p class="card-text"><span>Postion: {{item.position}} </span></p>
+        <div class="row">
+            <div class="col-4">
+                <button style="width: 100%;" class="btn btn-danger btn-block" (click)="deleteEmployee(i)">Delete Employee</button>
+            </div>
+            <div class="col-4">
+                <button style="width: 100%;" class="btn btn-info btn-block" (click)="editEmployee(item,i)">Edit Employee</button>
+            </div>
+        </div>
+    </div>
+</div>
