@@ -12,6 +12,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-form',
@@ -33,7 +34,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   constructor(
     private formBuilder: FormBuilder,
-    private newEmployeeService: EmployeService
+    private newEmployeeService: EmployeService,
+    private toastr: ToastrService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -64,6 +66,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       ...this.fg.value,
     });
     this.fg.reset();
+    this.toastr.success('Added employee', 'Succes');
+
   }
 
   public fillField() {
@@ -84,5 +88,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.newEmployeeService.editEmployee(this.fg.value, this.infoForm.index);
     this.fg.reset();
     this.editForm = false;
+    this.toastr.info('Employee edited', 'Succes');
+
   }
 }

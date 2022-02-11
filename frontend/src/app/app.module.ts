@@ -14,6 +14,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { TableEmployeesComponent } from './shared/components/table-employees/table-employees.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,10 +25,17 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     TableEmployeesComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, DataTablesModule, DataTablesModule.forRoot()],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    DataTablesModule,
+    DataTablesModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [
-  ]
+  exports: [],
 })
 export class AppModule {}
