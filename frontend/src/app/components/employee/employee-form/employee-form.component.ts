@@ -1,21 +1,28 @@
 import { EmployeService } from './../../../shared/services/employe.service';
-import { Component, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { PositionEmployee } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.css'],
 })
-export class EmployeeFormComponent implements OnInit {
-  
+export class EmployeeFormComponent implements OnInit, OnChanges {
+  @Input() infoForm: any;
   public positions: any;
+  public editForm: boolean = false;
+
   public fg: FormGroup = new FormGroup({
     name: new FormControl(''),
     lastName: new FormControl(''),
@@ -24,7 +31,14 @@ export class EmployeeFormComponent implements OnInit {
     dateOfBirth: new FormControl(''),
   });
 
-  constructor(private formBuilder: FormBuilder, private newEmployeeService: EmployeService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private newEmployeeService: EmployeService
+  ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.fillField();
+  }
 
   ngOnInit(): void {
     this.fg = this.formBuilder.group({
@@ -34,22 +48,41 @@ export class EmployeeFormComponent implements OnInit {
       position: ['', Validators.required],
       statusWork: ['', Validators.required],
     });
-    this.newEmployeeService.getListPosition().subscribe(resp =>{
-      console.log('data',resp);
+    this.newEmployeeService.getListPosition().subscribe((resp) => {
       this.positions = resp.positions;
-    })
+    });
   }
-  
-  public validFields(field: string){
-    return this.fg.controls[field].errors && this.fg.controls[field].touched 
+
+  public validFields(field: string) {
+    return this.fg.controls[field].errors && this.fg.controls[field].touched;
   }
 
   public newEmployee() {
-    console.log(this.fg.value);
     if (this.fg.invalid) return;
-    
+
     this.newEmployeeService.addEmployee({
       ...this.fg.value,
     });
+    this.fg.reset();
+  }
+
+  public fillField() {
+    if (!this.infoForm.employee) {
+      return;
+    }
+    this.editForm = true;
+    this.fg.patchValue({
+      name: this.infoForm.employee.name,
+      lastName: this.infoForm.employee.lastName,
+      position: this.infoForm.employee.position,
+      statusWork: this.infoForm.employee.statusWork,
+      dateOfBirth: this.infoForm.employee.dateOfBirth,
+    });
+  }
+
+  public updateListEmployees() {
+    this.newEmployeeService.editEmployee(this.fg.value, this.infoForm.index);
+    this.fg.reset();
+    this.editForm = false;
   }
 }

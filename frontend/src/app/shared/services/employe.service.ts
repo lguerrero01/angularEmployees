@@ -28,6 +28,14 @@ export class EmployeService {
     ]);
   }
 
+  public editEmployee(employee: any, index: number):void{
+    let updateEmploye:any
+
+    updateEmploye = this.newEmployee$.getValue();
+    updateEmploye[index] = employee; 
+
+    this.newEmployee$.next(updateEmploye);
+  }
  public getListPosition(): Observable<PositionEmployee> {
     return this.http.get<PositionEmployee>(this.urlAPI).pipe(
       map((resp: PositionEmployee) => resp)

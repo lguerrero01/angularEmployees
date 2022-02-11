@@ -1,11 +1,11 @@
 <div class="container pt-3">
-    <h1 class="text-center tituloClass">Add and Edit</h1>
-    <div class="row mt-3">
-      <div class="col-lg-4 mt-1">
-          <app-employee-form ></app-employee-form>
-      </div>
-      <div class="col mt-1">
-          <app-employee-list (editEm)="fillForm($event)"></app-employee-list>
-      </div>
+  <h1 class="text-center tituloClass">Add and Edit</h1>
+  <div class="row mt-3">
+    <div class="col-lg-4 mt-1">
+      <app-employee-form [infoForm]="infoForm"></app-employee-form>
+    </div>
+    <div class="col m-1">
+      <app-employee-list (editEm)="fillForm($event)"></app-employee-list>
     </div>
   </div>
+</div>
