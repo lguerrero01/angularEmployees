@@ -22,10 +22,6 @@ export class TableEmployeesComponent implements OnInit, OnDestroy{
   constructor( private employeeService: EmployeService) { }
 
   ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 2
-    };
     this.employeeService.newEmployee$.subscribe( resp => {
       console.log('esta es la respuesta',resp);
       this.listEmployees = resp;
