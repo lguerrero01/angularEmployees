@@ -1,10 +1,15 @@
 <div class="container pt-3">
-  <h1 class="text-center tituloClass">Add and Edit</h1>
+  <div class="row justify-content-center text-center">
+    <h1 class="text-center tituloClass col">Add and Edit <span data-aos="fade-down" data-aos-duration="2000"><i
+          class="fa fa-arrow-down col" aria-hidden="true"></i></span></h1>
+
+  </div>
+
   <div class="row mt-3">
-    <div class="col-lg-4 mt-1">
+    <div class="col-lg-4 mt-1" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
       <app-employee-form [infoForm]="infoForm"></app-employee-form>
     </div>
-    <div class="col m-1">
+    <div class="col m-1" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
       <app-employee-list (editEm)="fillForm($event)"></app-employee-list>
     </div>
   </div>
