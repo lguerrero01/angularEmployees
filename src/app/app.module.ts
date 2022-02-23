@@ -16,6 +16,7 @@ import { TableEmployeesComponent } from './shared/components/table-employees/tab
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StickyButtonComponent } from './shared/components/sticky-button/sticky-button.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     FooterComponent,
     TableEmployeesComponent,
+    StickyButtonComponent,
   ],
   imports: [
     BrowserModule,

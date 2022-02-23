@@ -1,24 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import 'aos/dist/aos.css';  */
-@import '~ngx-toastr/toastr';
-h1, h2 {
-    color: #000;
+@import "~ngx-toastr/toastr";
+h1,
+h2 {
+  color: #000;
 }
 body {
-	background: linear-gradient(-45deg, #2CC389, #009292, #1E6073, #2F4858);
-	background-size: 400% 400%;
+  /* background: linear-gradient(-45deg, #2CC389, #009292, #1E6073, #2F4858); */
+  /* background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
-	height: 100vh;
+	height: 100vh; */
 }
 
 @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body.dark-mode h1 {
+  color: #dfe6e9 !important;
+}
+body.dark-mode h5, th {
+  color: #000000 !important;
+}
+body.dark-mode h2,
+td,
+span,
+label {
+  color: #050505 !important;
+}
+
+body.light-mode {
+  background-color: #dfe6e9;
+  color: #2d3436;
+}
+
+body.dark-mode {
+  background-color: #2d3436;
+  color: #dfe6e9;
+}
+body:not(.dark-mode-preloading) {
+  transition: all 0.5s linear;
 }
